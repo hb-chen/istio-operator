@@ -1,0 +1,38 @@
+{{- if .Values.tracing.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: tracing
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: tracing
+    release: {{ .Release.Name }}
+  annotations:
+    {{- range $key, $value := .Values.tracing.ingress.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+{{- if .Values.tracing.ingress.hosts }}
+    {{- range $host := .Values.tracing.ingress.hosts }}
+    - host: {{ $host }}
+      http:
+        paths:
+          - path: {{ if $.Values.tracing.contextPath }} {{ $.Values.tracing.contextPath }} {{ else }} / {{ end }}
+            backend:
+              serviceName: tracing
+              servicePort: 9090
+    {{- end -}}
+{{- else }}
+    - http:
+        paths:
+          - path: {{ if .Values.tracing.contextPath }} {{ .Values.tracing.contextPath }} {{ else }} / {{ end }}
+            backend:
+              serviceName: tracing
+              servicePort: 9090
+{{- end }}
+  {{- if .Values.tracing.ingress.tls }}
+  tls:
+{{ toYaml .Values.tracing.ingress.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}

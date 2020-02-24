@@ -1,0 +1,38 @@
+{{- if .Values.kiali.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kiali
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: kiali
+    release: {{ .Release.Name }}
+  annotations:
+    {{- range $key, $value := .Values.kiali.ingress.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+{{- if .Values.kiali.ingress.hosts }}
+    {{- range $host := .Values.kiali.ingress.hosts }}
+    - host: {{ $host }}
+      http:
+        paths:
+          - path: {{ if $.Values.kiali.contextPath }} {{ $.Values.kiali.contextPath }} {{ else }} / {{ end }}
+            backend:
+              serviceName: kiali
+              servicePort: 9090
+    {{- end -}}
+{{- else }}
+    - http:
+        paths:
+          - path: {{ if .Values.kiali.contextPath }} {{ .Values.kiali.contextPath }} {{ else }} / {{ end }}
+            backend:
+              serviceName: kiali
+              servicePort: 9090
+{{- end }}
+  {{- if .Values.kiali.ingress.tls }}
+  tls:
+{{ toYaml .Values.kiali.ingress.tls | indent 4 }}
+  {{- end -}}
+{{- end -}}
