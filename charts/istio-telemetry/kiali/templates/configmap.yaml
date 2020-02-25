@@ -38,9 +38,9 @@ data:
         url: {{ .Values.kiali.dashboard.grafanaURL }}
       prometheus:
 {{- if .Values.global.prometheusNamespace }}
-        url: http://prometheus.{{ .Values.global.prometheusNamespace }}:9090
+        url: http://prometheus.{{ .Values.global.prometheusNamespace }}:9090{{- .Values.prometheus.contextPath -}}
 {{ else }}
-        url: http://prometheus:9090
+        url: http://prometheus:9090{{- .Values.prometheus.contextPath -}}
 {{- end }}
 {{- if .Values.kiali.security.enabled }}
     identity:
