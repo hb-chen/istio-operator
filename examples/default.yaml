@@ -1,0 +1,31 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  namespace: istio-system
+  name: istio-operator
+spec:
+  profile: default
+  hub: dockerhub.azk8s.cn/istio
+
+  values:
+    prometheus:
+      hub: dockerhub.azk8s.cn/prom
+      ingress:
+        enabled: true
+    grafana:
+      enabled: true
+      ingress:
+        enabled: true
+    tracing:
+      enabled: true
+      ingress:
+        enabled: true
+        hosts:
+          - tracing.loca
+    kiali:
+      enabled: true
+      hub: quay.azk8s.cn/kiali
+      createDemoSecret: true
+      ingress:
+        enabled: true
+
