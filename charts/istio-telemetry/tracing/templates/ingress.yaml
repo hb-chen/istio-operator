@@ -21,7 +21,7 @@ spec:
           - path: {{ if $.Values.tracing.contextPath }} {{ $.Values.tracing.contextPath }} {{ else }} / {{ end }}
             backend:
               serviceName: tracing
-              servicePort: 9090
+              servicePort: 80
     {{- end -}}
 {{- else }}
     - http:
