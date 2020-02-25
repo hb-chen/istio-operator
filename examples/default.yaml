@@ -16,6 +16,20 @@ spec:
       enabled: true
       ingress:
         enabled: true
+      # Prometheus默认contextPath=/prometheus，datasource url需要增加path
+      datasources:
+        datasources.yaml:
+          apiVersion: 1
+          datasources:
+            - name: Prometheus
+              type: prometheus
+              orgId: 1
+              url: http://prometheus:9090/prometheus
+              access: proxy
+              isDefault: true
+              jsonData:
+                timeInterval: 5s
+              editable: true
     tracing:
       enabled: true
       ingress:
