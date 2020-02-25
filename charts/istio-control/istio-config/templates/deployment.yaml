@@ -171,6 +171,11 @@ spec:
       securityContext:
         fsGroup: 1337
       volumes:
+  {{- if or .Values.global.controlPlaneSecurityEnabled (and .Values.global.configValidation (not .Values.global.istiod.enabled)) }}
+      - name: istio-certs
+        secret:
+          secretName: istio.istio-galley-service-account
+  {{- end }}
   {{- if .Values.global.controlPlaneSecurityEnabled }}
       - name: envoy-config
         configMap:
