@@ -21,7 +21,7 @@ spec:
       ingress:
         enabled: true
         hosts:
-          - tracing.loca
+          - tracing.local
     kiali:
       enabled: true
       hub: quay.azk8s.cn/kiali
