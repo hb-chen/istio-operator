@@ -21,7 +21,7 @@ spec:
           - path: {{ if $.Values.kiali.contextPath }} {{ $.Values.kiali.contextPath }} {{ else }} / {{ end }}
             backend:
               serviceName: kiali
-              servicePort: 9090
+              servicePort: 20001
     {{- end -}}
 {{- else }}
     - http:

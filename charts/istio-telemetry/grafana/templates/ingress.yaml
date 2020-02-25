@@ -21,7 +21,7 @@ spec:
           - path: {{ if $.Values.grafana.contextPath }} {{ $.Values.grafana.contextPath }} {{ else }} / {{ end }}
             backend:
               serviceName: grafana
-              servicePort: 9090
+              servicePort: 3000
     {{- end -}}
 {{- else }}
     - http:
