@@ -39,7 +39,7 @@ spec:
       ingress:
         enabled: true
         hosts:
-          -istio.k8s.hbchen.com
+          - istio.k8s.hbchen.com
     grafana:
       ingress:
         enabled: true
@@ -64,7 +64,7 @@ spec:
         enabled: true
         contextPath: /jaeger
         hosts:
-          - hosts: istio.k8s.hbchen.com
+          - istio.k8s.hbchen.com
     kiali:
       hub: quay.azk8s.cn/kiali
       createDemoSecret: true
