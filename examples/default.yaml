@@ -38,9 +38,13 @@ spec:
       hub: dockerhub.azk8s.cn/prom
       ingress:
         enabled: true
+        hosts:
+          -istio.k8s.hbchen.com
     grafana:
       ingress:
         enabled: true
+        hosts:
+          - istio.k8s.hbchen.com
       # Prometheus默认contextPath=/prometheus，datasource url需要增加path
       datasources:
         datasources.yaml:
@@ -58,11 +62,13 @@ spec:
     tracing:
       ingress:
         enabled: true
+        contextPath: /jaeger
         hosts:
-          - tracing.local
+          - hosts: istio.k8s.hbchen.com
     kiali:
       hub: quay.azk8s.cn/kiali
       createDemoSecret: true
       ingress:
         enabled: true
-
+        hosts:
+          - istio.k8s.hbchen.com
