@@ -60,9 +60,9 @@ spec:
                 timeInterval: 5s
               editable: true
     tracing:
+      contextPath: /jaeger
       ingress:
         enabled: true
-        contextPath: /jaeger
         hosts:
           - istio.k8s.hbchen.com
     kiali:
