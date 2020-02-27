@@ -13,9 +13,9 @@ spec:
     citadel:
       enabled: true
     galley:
-      enabled: true
+      enabled: false
     egressGateways:
-      - enabled: true
+      - enabled: false
 
   addonComponents:
     prometheus:
