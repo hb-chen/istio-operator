@@ -1,10 +1,30 @@
 # istio-operator
 
 ```shell script
+# apply
+istioctl manifest apply \
+-f examples/default.yaml \
+--set installPackagePath=$PWD/charts
+
+# generate
 istioctl manifest generate \
 -f examples/default.yaml \
 --set installPackagePath=$PWD/charts \
 > generate-default.yaml
+
+# generate后kubectl apply测试部署失败
+```
+
+## Envoy日志
+[istio 数据面调试指南](https://imfox.io/2020/02/12/istio-debug-with-envoy-log/)
+```
+kubectl -n istio-system edit cm istio
+......
+# Set accessLogFile to empty string to disable access log.
+accessLogFile: "/dev/stdout" # 开启日志
+
+accessLogEncoding: 'JSON' # 默认日志是单行格式， 可选设置为 JSON
+......
 ```
 
 ```shell script
