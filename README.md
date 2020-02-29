@@ -8,8 +8,8 @@
         - [x] `kiali`
         - [x] `tracing`
     - contextPath
-        - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR[istio#21383]https://github.com/istio/istio/pull/21383
-        - `kiali`依赖的`prometheus`增加`prometheus.contextPath`支持
+        - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR[istio#21383](https://github.com/istio/istio/pull/21383)
+        - `kiali`依赖的`prometheus`增加`prometheus.contextPath`支持，PR[istio#21668](https://github.com/istio/istio/pull/21668)
 - examples
     - `default.yaml`
         - `grafana`的`datasources`需要根据`prometheus`的`contextPath`配置，需要自定义，其他配置正常
