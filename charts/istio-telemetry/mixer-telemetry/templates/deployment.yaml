@@ -66,9 +66,7 @@ spec:
 {{- else }}
         image: "{{ .Values.mixer.telemetry.hub | default .Values.global.hub }}/{{ .Values.mixer.telemetry.image }}:{{ .Values.mixer.telemetry.tag | default .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 9091
         - containerPort: 15014
@@ -130,6 +128,9 @@ spec:
           runAsUser: 1337
           runAsGroup: 1337
           runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
         volumeMounts:
 {{- if .Values.global.useMCP }}
         - name: istio-certs
@@ -154,9 +155,7 @@ spec:
 {{- else }}
         image: "{{ .Values.global.hub }}/{{ .Values.global.proxy.image }}:{{ .Values.global.tag }}"
 {{- end }}
-{{- if .Values.global.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.global.imagePullPolicy }}
-{{- end }}
+        imagePullPolicy: {{ .Values.global.imagePullPolicy | default "Always" }}
         ports:
         - containerPort: 15004
         - containerPort: 15090

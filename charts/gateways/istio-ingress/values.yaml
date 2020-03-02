@@ -3,6 +3,22 @@
 
 gateways:
   istio-ingressgateway:
+    #
+    # Secret Discovery Service (SDS) configuration for ingress gateway.
+    #
+    sds:
+      # If true, ingress gateway fetches credentials from SDS server to handle TLS connections.
+      enabled: false
+      # SDS server that watches kubernetes secrets and provisions credentials to ingress gateway.
+      # This server runs in the same pod as ingress gateway.
+      image: node-agent-k8s
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 2000m
+          memory: 1024Mi
     labels:
       app: istio-ingressgateway
       istio: ingressgateway
@@ -15,10 +31,9 @@ gateways:
       targetPort: 15020
       name: status-port
     - port: 80
-      targetPort: 8080
+      targetPort: 80
       name: http2
     - port: 443
-      targetPort: 8443
       name: https
     - port: 15029
       targetPort: 15029
@@ -32,6 +47,9 @@ gateways:
     - port: 15032
       targetPort: 15032
       name: tracing
+    - port: 31400
+      targetPort: 31400
+      name: tcp
       # This is the port where sni routing happens
     - port: 15443
       targetPort: 15443
@@ -68,7 +86,7 @@ gateways:
 
     # Enable cross-cluster access using SNI matching
     zvpn:
-      enabled: true
+      enabled: false
       suffix: global
 
     # To generate an internal load balancer:

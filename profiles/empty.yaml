@@ -1,4 +1,6 @@
-apiVersion: operator.istio.io/v1alpha1
+# The empty profile has everything disabled
+# This is useful as a base for custom user configuration
+apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
   hub: gcr.io/istio-testing
@@ -19,6 +21,8 @@ spec:
     sidecarInjector:
       enabled: false
     citadel:
+      enabled: false
+    nodeAgent:
       enabled: false
     galley:
       enabled: false

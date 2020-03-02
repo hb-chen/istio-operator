@@ -1,9 +1,9 @@
-apiVersion: operator.istio.io/v1alpha1
+apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
   components:
     pilot:
-      enabled: false
+      enabled: true
     policy:
       enabled: false
     telemetry:
@@ -13,6 +13,8 @@ spec:
     sidecarInjector:
       enabled: false
     citadel:
+      enabled: false
+    nodeAgent:
       enabled: false
     galley:
       enabled: false
@@ -24,10 +26,6 @@ spec:
       enabled: false
 
   values:
-    pilot:
-      configSource:
-        subscribedResources:
-
     security:
       createMeshPolicy: false
 
