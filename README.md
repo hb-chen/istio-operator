@@ -73,6 +73,7 @@ istioctl manifest generate \
 
 ## Envoy日志
 [istio 数据面调试指南](https://imfox.io/2020/02/12/istio-debug-with-envoy-log/)
+[Envoy RESPONSE_FLAGS说明](https://www.envoyproxy.io/docs/envoy/latest/configuration/observability/access_log)
 ```
 kubectl -n istio-system edit cm istio
 ......
