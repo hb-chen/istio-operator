@@ -9,9 +9,9 @@ spec:
 
   components:
     policy:
-      enabled: true
+      enabled: false
     citadel:
-      enabled: true
+      enabled: false
     galley:
       enabled: false
     egressGateways:
