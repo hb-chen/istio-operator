@@ -4,14 +4,16 @@ metadata:
   namespace: istio-system
   name: istio-operator
 spec:
+  # 升级时使用，istioctl upgrade不支持--set
+  #installPackagePath: ""
   profile: default
   hub: dockerhub.azk8s.cn/istio
 
   components:
     policy:
-      enabled: false
+      enabled: true
     citadel:
-      enabled: false
+      enabled: true
     galley:
       enabled: false
     egressGateways:

@@ -44,6 +44,33 @@ istioctl manifest generate \
 
 ```
 
+**升级**
+```
+# 环境检查
+istioctl manifest versions
+kubectl config view
+
+# 不支持--set，所以installPackagePath要在config file中指定
+istioctl upgrade -f `<your-custom-configuration-file>`
+```
+
+**升级Sidecar**
+```
+Upgrade submitted. Please use `istioctl version` to check the current versions.
+To upgrade the Istio data plane, you will need to re-inject it.
+If you’re using automatic sidecar injection, you can upgrade the sidecar by doing a rolling update for all the pods:
+    kubectl rollout restart deployment --namespace <namespace with auto injection>
+If you’re using manual injection, you can upgrade the sidecar by executing:
+    kubectl apply -f < (istioctl kube-inject -f <original application deployment yaml>)
+```
+
+**卸载**
+```
+istioctl manifest generate \
+-f examples/default.yaml \
+--set installPackagePath=$PWD/charts | kubectl delete -f -
+```
+
 ## Envoy日志
 [istio 数据面调试指南](https://imfox.io/2020/02/12/istio-debug-with-envoy-log/)
 ```
