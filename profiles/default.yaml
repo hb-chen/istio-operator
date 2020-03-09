@@ -4,7 +4,7 @@ metadata:
   namespace: istio-system
 spec:
   hub: docker.io/istio
-  tag: 1.5.0-beta.4
+  tag: 1.5.0
 
   # Traffic management feature
   components:
@@ -704,8 +704,9 @@ spec:
         passphraseKey: passphrase
         viewOnlyMode: false
         grafanaURL:
+        grafanaInClusterURL: http://grafana:3000
         jaegerURL:
-        jaegerInClusterURL: http://tracing.istio-system/jaeger
+        jaegerInClusterURL: http://tracing/jaeger
       prometheusNamespace:
       createDemoSecret: false
       security:
