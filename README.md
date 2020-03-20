@@ -9,6 +9,7 @@
         - [x] `tracing`
     - contextPath
         - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR[istio#21383](https://github.com/istio/istio/pull/21383)
+            - *或者通过`ingress`做`rewrite`，`VirtualService`也支持`rewrite`*
         - `kiali`依赖的`prometheus`增加`prometheus.contextPath`支持，PR[istio#21668](https://github.com/istio/istio/pull/21668)
 - examples
     - `default.yaml`
