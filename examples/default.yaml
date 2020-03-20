@@ -5,8 +5,9 @@ metadata:
   name: istio-operator
 spec:
   # 升级时使用，istioctl upgrade不支持--set
-  #installPackagePath: ""
-  profile: default
+  # 指定install_package_path后必须同时指定profile，否则报错，默认会到install_package_path的路径下查找profiles/default.yaml
+  # profile: default
+  # install_package_path: ""
   hub: dockerhub.azk8s.cn/istio
 
   components:

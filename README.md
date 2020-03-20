@@ -3,7 +3,8 @@
 在官方release版本基础上自定义charts，以及自己部署的examples示例
 
 - charts
-    - ingress
+    - [ ] `ingress`中有`addongateway`，这样不依赖`ingress`，但都是`https`，可以增加`http`发布测试
+    - ingress    
         - [x] `grafana`
         - [x] `kiali`
         - [x] `tracing`
@@ -27,10 +28,11 @@
 **`manifest apply`直接部署**
 ```shell script
 # -f 自定义配置
-# --set installPackagePath 自定义charts
+# --set install_package_path 自定义charts
 istioctl manifest apply \
 -f examples/default.yaml \
---set installPackagePath=$PWD/charts
+--set profile=$PWD/profiles/default.yaml \
+--set install_package_path=$PWD/charts
 ```
 
 **`manifest generate`后`kubectl apply`部署**
@@ -40,7 +42,8 @@ istioctl manifest apply \
 ```shell script
 istioctl manifest generate \
 -f examples/default.yaml \
---set installPackagePath=$PWD/charts \
+--set profile=$PWD/profiles/default.yaml \
+--set install_package_path=$PWD/charts \
 > generate-default.yaml
 
 ```
@@ -51,7 +54,7 @@ istioctl manifest generate \
 istioctl manifest versions
 kubectl config view
 
-# 不支持--set，所以installPackagePath要在config file中指定
+# 不支持--set，所以install_package_path要在config file中指定
 istioctl upgrade -f `<your-custom-configuration-file>`
 ```
 
