@@ -30,7 +30,7 @@
 # -f 自定义配置
 # --set install_package_path 自定义charts
 istioctl manifest apply \
--f examples/default.yaml \
+-f profile.yaml \
 --set profile=$PWD/profiles/default.yaml \
 --set install_package_path=$PWD/charts
 ```
@@ -41,7 +41,7 @@ istioctl manifest apply \
 
 ```shell script
 istioctl manifest generate \
--f examples/default.yaml \
+-f profile.yaml \
 --set profile=$PWD/profiles/default.yaml \
 --set install_package_path=$PWD/charts \
 > generate-default.yaml

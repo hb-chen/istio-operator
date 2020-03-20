@@ -14,6 +14,7 @@ spec:
   selector:
     istio: ingressgateway
   servers:
+{{- if $addon.tls }}
     - port:
         number: {{ $addon.port }}
         name: https-{{ $addon.name }}
@@ -24,6 +25,14 @@ spec:
         privateKey: /etc/istio/ingressgateway-certs/tls.key
       hosts:
         - "*"
+  {{- else }}
+    - port:
+        number: {{ $addon.port }}
+        name: https-{{ $addon.name }}
+        protocol: HTTP
+        hosts:
+          - "*"
+{{- end }}
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

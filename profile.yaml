@@ -37,41 +37,19 @@ spec:
       enabled: true
 
   values:
+    gateways:
+      istio-ingressgateway:
+        telemetry_addon_gateways:
+          prometheus_gateway:
+            enabled: true
+          grafana_gateway:
+            enabled: true
+          kiali_gateway:
+            enabled: true
+          tracing_gateway:
+            enabled: true
     prometheus:
       hub: dockerhub.azk8s.cn/prom
-      ingress:
-        enabled: true
-        hosts:
-          - prometheus.k8s.hbchen.com
-    grafana:
-      ingress:
-        enabled: true
-        hosts:
-          - grafana.k8s.hbchen.com
-      # Prometheus默认contextPath=/prometheus，datasource url需要增加path
-      datasources:
-        datasources.yaml:
-          apiVersion: 1
-          datasources:
-            - name: Prometheus
-              type: prometheus
-              orgId: 1
-              url: http://prometheus:9090/prometheus
-              access: proxy
-              isDefault: true
-              jsonData:
-                timeInterval: 5s
-              editable: true
-    tracing:
-      contextPath: /jaeger
-      ingress:
-        enabled: true
-        hosts:
-          - tracing.k8s.hbchen.com
     kiali:
       hub: quay.azk8s.cn/kiali
       createDemoSecret: true
-      ingress:
-        enabled: true
-        hosts:
-          - kiali.k8s.hbchen.com
