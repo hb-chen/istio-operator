@@ -28,7 +28,7 @@ spec:
   {{- else }}
     - port:
         number: {{ $addon.port }}
-        name: https-{{ $addon.name }}
+        name: http-{{ $addon.name }}
         protocol: HTTP
         hosts:
           - "*"
