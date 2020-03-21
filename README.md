@@ -3,11 +3,14 @@
 在官方release版本基础上自定义charts，以及自己部署的examples示例
 
 - charts
-    - [ ] `ingress`中有`addongateway`，这样不依赖`ingress`，但都是`https`，可以增加`http`发布测试
-    - ingress    
-        - [x] `grafana`
-        - [x] `kiali`
-        - [x] `tracing`
+    - ingress
+        - istio ingress
+            - 使用`ingressgateway`不依赖`ingress`，虽然`values`配置中`telemetry_addon_gateways`有`tls`，但在`addongateway.yaml`模板中并没有支持，这里做了支持
+            - 官方在`operator`中已经将原本在`helm`中的几个`ingress`去掉(只有`prometheus`的保留)，同时`helm`也已经弃用，所以建议使用`ingressgateway`
+        - ~~kubernetes ingress~~
+            - [x] `grafana`
+            - [x] `kiali`
+            - [x] `tracing`
     - contextPath
         - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR[istio#21383](https://github.com/istio/istio/pull/21383)
             - *或者通过`ingress`做`rewrite`，`VirtualService`也支持`rewrite`*
