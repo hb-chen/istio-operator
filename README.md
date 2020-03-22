@@ -11,20 +11,20 @@
             - [x] `grafana`
             - [x] `kiali`
             - [x] `tracing`
-    - contextPath
-        - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR[istio#21383](https://github.com/istio/istio/pull/21383)
+    - ~~contextPath~~
+        - `prometheus`和`grafana`的`deployment`未支持路由的子路径，PR [istio#21383](https://github.com/istio/istio/pull/21383)
             - *或者通过`ingress`做`rewrite`，`VirtualService`也支持`rewrite`*
-        - `kiali`依赖的`prometheus`增加`prometheus.contextPath`支持，PR[istio#21668](https://github.com/istio/istio/pull/21668)
-- examples
-    - `default.yaml`
-        - `grafana`的`datasources`需要根据`prometheus`的`contextPath`配置，需要自定义，其他配置正常
-- 国内镜像源
-    - Istio `release`版本镜像在`docker.io/istio`，而`dev`版本镜像在`gcr.io/istio-testing`，注意根据自己的需求选择
-    - [mirror.azure.cn](http://mirror.azure.cn/help/)
-        - gcr.azk8s.cn
-        - dockerhub.azk8s.cn
-        - quay.azk8s.cn
-    - [mirrors.ustc.edu.cn](http://mirrors.ustc.edu.cn/)
+        - `kiali`依赖的`prometheus`增加`prometheus.contextPath`支持，PR [istio#21668](https://github.com/istio/istio/pull/21668)
+- `profile.yaml`
+    - 启动 Prometheus、Grafana、Kiali 和 Tracing 的网关
+    - Kiali`createDemoSecret=true`使用默认用户名(admin)和密码(admin)创建密钥
+    - 国内镜像源
+        - Istio `release`版本镜像在`docker.io/istio`，而`dev`版本镜像在`gcr.io/istio-testing`，注意根据自己的需求选择
+        - [mirror.azure.cn](http://mirror.azure.cn/help/)
+            - gcr.azk8s.cn
+            - dockerhub.azk8s.cn
+            - quay.azk8s.cn
+        - [mirrors.ustc.edu.cn](http://mirrors.ustc.edu.cn/)
 
 ## istioctl部署
 
